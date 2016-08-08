@@ -28,7 +28,7 @@ public class User {
     private boolean isAdmin;
 
     @Column(name = "createdDate")
-    @DateTimeFormat(pattern = "yyyy-mm-dd hh:mm:ss.S")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 

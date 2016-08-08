@@ -9,6 +9,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -78,7 +79,7 @@
                 <td>${user.name}</td>
                 <td>${user.age}</td>
                 <td>${user.isAdmin}</td>
-                <td>${user.createdDate}</td>
+                <td><fmt:formatDate value="${user.createdDate}" pattern = "yyyy-MM-dd HH:mm:ss"/></td>
                 <td><a href="<c:url value='/edit/${user.id}'/>">edit</a></td>
                 <td><a href="<c:url value='/remove/${user.id}'/>">delete</a></td>
             </tr>
