@@ -8,7 +8,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
 <html>
@@ -55,7 +54,6 @@
     </style>
 </head>
 <body>
-<a href="../../index.jsp">Back to main menu</a>
 
 <br/>
 <br/>
@@ -137,16 +135,7 @@
                 <form:input path="isAdmin"/>
             </td>
         </tr>
-        <tr>
-            <td>
-                <form:label path="createdDate">
-                    <spring:message text="Created Date"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="createdDate"/>
-            </td>
-        </tr>
+
         <tr>
             <td colspan="2">
                 <c:if test="${!empty user.name}">

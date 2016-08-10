@@ -66,4 +66,14 @@ public class UserDaoImpl implements UserDao {
         }
         return users;
     }
+
+    @SuppressWarnings("unchecked")
+    public List<User> listUsers(String query) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<User> users = session.createQuery("from User where name = '" + query + "'").list();
+        for(User user: users){
+            logger.info("User list: " + user);
+        }
+        return users;
+    }
 }

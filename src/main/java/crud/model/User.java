@@ -28,8 +28,6 @@ public class User {
     private boolean isAdmin;
 
     @Column(name = "createdDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
     public int getId() {
