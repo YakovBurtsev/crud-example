@@ -77,7 +77,7 @@
                 <td>${user.name}</td>
                 <td>${user.age}</td>
                 <td>${user.isAdmin}</td>
-                <td><fmt:formatDate value="${user.createdDate}" pattern = "yyyy-MM-dd HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${user.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><a href="<c:url value='/edit/${user.id}'/>">edit</a></td>
                 <td><a href="<c:url value='/remove/${user.id}'/>">delete</a></td>
             </tr>
@@ -150,6 +150,25 @@
         </tr>
     </table>
 </form:form>
+<br/>
+<br/>
+<form method="get" action="searchingResult">
+    <table>
+        <tr>
+            <td>
+                <label for="search">Name</label>
+            </td>
+            <td>
+                <input type="text" id="search" name="name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Search">
+            </td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
 

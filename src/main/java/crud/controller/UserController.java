@@ -57,4 +57,11 @@ public class UserController {
         return "users";
     }
 
+    @RequestMapping(value = "searchingResult", method = RequestMethod.GET)
+    public String listUsers(Model model, String name) {
+        model.addAttribute("user", new User());
+        model.addAttribute("listUsersByName", this.userService.listUsersByName(name));
+        return "searchingResult";
+    }
+
 }

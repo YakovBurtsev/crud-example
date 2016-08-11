@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,10 +66,11 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<User> listUsers(String query) {
+    public List<User> listUsersByName(String name) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<User> users = session.createQuery("from User where name = '" + query + "'").list();
+        List<User> users = session.createQuery("from User where name = '" + name + "'").list();
         for(User user: users){
             logger.info("User list: " + user);
         }

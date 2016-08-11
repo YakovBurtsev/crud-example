@@ -8,7 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -54,7 +54,6 @@
     </style>
 </head>
 <body>
-<a href="../../index.jsp">Back to main menu</a>
 
 <br/>
 <br/>
@@ -78,7 +77,7 @@
                 <td>${user.name}</td>
                 <td>${user.age}</td>
                 <td>${user.isAdmin}</td>
-                <td>${user.createdDate}</td>
+                <td><fmt:formatDate value="${user.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><a href="<c:url value='/edit/${user.id}'/>">edit</a></td>
                 <td><a href="<c:url value='/remove/${user.id}'/>">delete</a></td>
             </tr>
@@ -136,16 +135,7 @@
                 <form:input path="isAdmin"/>
             </td>
         </tr>
-        <tr>
-            <td>
-                <form:label path="createdDate">
-                    <spring:message text="Created Date"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="createdDate"/>
-            </td>
-        </tr>
+
         <tr>
             <td colspan="2">
                 <c:if test="${!empty user.name}">
@@ -160,6 +150,25 @@
         </tr>
     </table>
 </form:form>
+<br/>
+<br/>
+<form method="get" action="searchingResult">
+    <table>
+        <tr>
+            <td>
+                <label for="search">Name</label>
+            </td>
+            <td>
+                <input type="text" id="search" name="name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Search">
+            </td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
 
