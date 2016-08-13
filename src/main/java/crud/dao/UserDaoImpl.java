@@ -1,6 +1,7 @@
 package crud.dao;
 
 import crud.model.User;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+    public static final int ROWS_PER_PAGE = 5;
 
     private SessionFactory sessionFactory;
 
@@ -57,9 +59,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<User> listUsers() {
+    public List<User> listUsers(int page) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<User> users = session.createQuery("from User").list();
+        Query query = session.createQuery("from User");
+        query.setFirstResult((page-1)* ROWS_PER_PAGE);
+        query.setMaxResults(ROWS_PER_PAGE);
+        List<User> users = query.list();
         for(User user: users){
             logger.info("User list: " + user);
         }
@@ -75,5 +80,14 @@ public class UserDaoImpl implements UserDao {
             logger.info("User list: " + user);
         }
         return users;
+    }
+
+    @Override
+    public int count() {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select count(*) from User");
+        Long count = (Long)query.uniqueResult();
+        logger.info("Users count: " + count);
+        return count.intValue();
     }
 }

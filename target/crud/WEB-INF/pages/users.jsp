@@ -84,7 +84,42 @@
         </c:forEach>
     </table>
 </c:if>
-
+<div class="pagination">
+    <table>
+        <tbody>
+            <tr>
+                <c:choose>
+                    <c:when test="${currentPage == 1}">
+                        <td class="disabled"><a href="#">&lt;&lt;</a></td>
+                    </c:when>
+                    <c:otherwise>
+                        <td><a href="<c:url value="/users"><c:param name="page" value="1"/>1</c:url>">&lt;&lt;</a></td>
+                    </c:otherwise>
+                </c:choose>
+                <c:forEach begin="${startPage}" end="${endPage}" var="p">
+                    <td>
+                        <c:choose>
+                            <c:when test ="${p==currentPage}">
+                                <a href="<c:url value="/users"><c:param name="page" value="${p}"/>${p}</c:url>"><strong>${p}</strong></a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="<c:url value="/users"><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </c:forEach>
+                <c:choose>
+                    <c:when test="${currentPage == lastPage}">
+                        <td class="disabled"><a href="#">&gt;&gt;</a></td>
+                    </c:when>
+                    <c:otherwise>
+                        <td><a href="<c:url value="/users"><c:param name="page" value="${lastPage}"/>${lastPage}</c:url>">&gt;&gt;</a></td>
+                    </c:otherwise>
+                </c:choose>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <h1>Add/Edit a User</h1>
 
@@ -152,6 +187,7 @@
 </form:form>
 <br/>
 <br/>
+<h1>Search users by name</h1>
 <form method="get" action="searchingResult">
     <table>
         <tr>

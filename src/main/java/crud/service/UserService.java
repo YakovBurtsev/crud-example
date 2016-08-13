@@ -16,7 +16,9 @@ public interface UserService {
 
     User getUserById(int id);
 
-    List<User> listUsers();
+    List<User> listUsers(int page);
 
     List<User> listUsersByName(String name);
+
+    int count();
 }
