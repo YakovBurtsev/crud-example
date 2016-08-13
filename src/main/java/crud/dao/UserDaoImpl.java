@@ -73,11 +73,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<User> listUsersByName(String name) {
+    public List<User> listUsersByName(String name, int page) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<User> users = session.createQuery("from User where name = '" + name + "'").list();
+        Query query = session.createQuery("from User where name = '" + name + "'");
+        query.setFirstResult((page-1)* ROWS_PER_PAGE);
+        query.setMaxResults(ROWS_PER_PAGE);
+        List<User> users = query.list();
         for(User user: users){
-            logger.info("User list: " + user);
+            logger.info("Users by name list: " + user);
         }
         return users;
     }
@@ -88,6 +91,15 @@ public class UserDaoImpl implements UserDao {
         Query query = session.createQuery("select count(*) from User");
         Long count = (Long)query.uniqueResult();
         logger.info("Users count: " + count);
+        return count.intValue();
+    }
+
+    @Override
+    public int searchByNameResultCount(String name) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select count(*) from User where name = '" + name + "'");
+        Long count = (Long)query.uniqueResult();
+        logger.info("Users by name count: " + count);
         return count.intValue();
     }
 }

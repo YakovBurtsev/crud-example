@@ -18,7 +18,9 @@ public interface UserService {
 
     List<User> listUsers(int page);
 
-    List<User> listUsersByName(String name);
+    List<User> listUsersByName(String name, int page);
 
     int count();
+
+    int searchByNameResultCount(String name);
 }

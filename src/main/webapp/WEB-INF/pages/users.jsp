@@ -78,8 +78,8 @@
                 <td>${user.age}</td>
                 <td>${user.isAdmin}</td>
                 <td><fmt:formatDate value="${user.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td><a href="<c:url value='/edit/${user.id}'/>">edit</a></td>
-                <td><a href="<c:url value='/remove/${user.id}'/>">delete</a></td>
+                <td><a href="<c:url value='/edit/${user.id}'><c:param name="page" value="${currentPage}"/></c:url>">edit</a></td>
+                <td><a href="<c:url value='/remove/${user.id}'><c:param name="page" value="${currentPage}"/></c:url>">delete</a></td>
             </tr>
         </c:forEach>
     </table>
@@ -125,7 +125,7 @@
 
 <c:url var="addAction" value="/users/add"/>
 
-<form:form action="${addAction}" commandName="user">
+<form:form action="${addAction}?page=${currentPage}&lastPage=${lastPage}" commandName="user">
     <table>
         <c:if test="${!empty user.name}">
             <tr>
@@ -157,7 +157,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="age"/>
+                <form:input path="age" pattern="[0-9]+"/>
             </td>
         </tr>
         <tr>
